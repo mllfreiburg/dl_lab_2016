@@ -29,7 +29,7 @@ import numpy
 from six.moves import urllib
 from six.moves import xrange  # pylint: disable=redefined-builtin
 import tensorflow as tf
-from sklearn.metrics import confusion_matrix
+#from sklearn.metrics import confusion_matrix
 
 import input_data
 
@@ -181,7 +181,8 @@ def main(argv=None):  # pylint: disable=unused-argument
     # if test_this_model_after_training:
     #     print('Test error: {}'.format(test_error))
     #     print('Confusion matrix:') 
-    #      print(confusion_matrix(test_labels, numpy.argmax(eval_in_batches(test_data, sess), 1)))
+    #     # NOTE: the following will require scikit-learn
+    #     print(confusion_matrix(test_labels, numpy.argmax(eval_in_batches(test_data, sess), 1)))
     pass
 
 if __name__ == '__main__':
