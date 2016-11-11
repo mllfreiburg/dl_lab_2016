@@ -5,7 +5,7 @@ $ python convolutional.py
 # rgb-d
 $ python convolutional.py --use_rgbd 
 ```
-### If you use this data you should cite
+### The data for this exercise is a downsampled version of the dataset from
     @inproceedings{lai2011large,
       title={A large-scale hierarchical multi-view rgb-d object dataset},
       author={Lai, Kevin and Bo, Liefeng and Ren, Xiaofeng and Fox, Dieter},
