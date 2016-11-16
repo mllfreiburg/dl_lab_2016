@@ -63,7 +63,7 @@ def load_images(image_set, filepath, end):
   for i in xrange(0,len(image_set)):
     img = scipy.misc.imread(os.path.join(filepath, image_set[i]+end), False, 'RGB')
     img = pad_image(img)
-    img = scipy.misc.resize(img, img.shape[0]/32.0, 'bilinear', None)
+    img = scipy.misc.imresize(img, (IMAGE_SIZE,IMAGE_SIZE,3), 'bilinear')
     # Convert from [0, 255] -> [0.0, 1.0].
     img = img.astype(numpy.float32)
     img = numpy.multiply(img, 1.0 / 255.0)
