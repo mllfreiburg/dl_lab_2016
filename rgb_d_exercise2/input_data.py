@@ -32,6 +32,10 @@ from six.moves import xrange  # pylint: disable=redefined-builtin
 SOURCE_URL = 'http://www2.informatik.uni-freiburg.de/~eitel/deep_learning_course/rgbd_10/data/'
 IMAGE_SIZE = 32
 
+if (int(scipy.__version__.split('.')[1]) < 17):
+  print('Minimum required scipy version:', 1.7)  
+  exit(1)
+  
 def maybe_download(filename, work_directory):
   """Download the data from the website, unless it's already here."""
   if not os.path.exists(work_directory):
