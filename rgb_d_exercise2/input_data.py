@@ -20,7 +20,7 @@ from __future__ import print_function
 
 import tarfile
 import os
-import cv2
+import scipy.misc
 import glob
 import re
 
@@ -61,12 +61,10 @@ def load_images(image_set, filepath, end):
   print('Loading rgb', len(image_set), 'images from', filepath)
   images = numpy.empty((len(image_set), IMAGE_SIZE , IMAGE_SIZE , 3), dtype=numpy.float32)
   for i in xrange(0,len(image_set)):
-    img = cv2.imread(os.path.join(filepath, image_set[i]+end), -1)
+    img = scipy.misc.imread(os.path.join(filepath, image_set[i]+end), False, 'RGB')
     img = pad_image(img)
-    img = cv2.resize(img, (IMAGE_SIZE,IMAGE_SIZE) , interpolation=cv2.INTER_CUBIC)
+    img = scipy.misc.imresize(img, (IMAGE_SIZE,IMAGE_SIZE,3), 'bilinear')
     # Convert from [0, 255] -> [0.0, 1.0].
-    # cv2.imshow("t", img)
-    # cv2.waitKey(0)
     img = img.astype(numpy.float32)
     img = numpy.multiply(img, 1.0 / 255.0)
     images[i] = img
@@ -79,26 +77,23 @@ def load_rgbd_images(image_set, filepath_rgb, filepath_depth, end):
   images = numpy.empty((len(image_set), IMAGE_SIZE , IMAGE_SIZE , channels), dtype=numpy.float32)
   for i in xrange(0,len(image_set)):
     # RGB image
-    img = cv2.imread(os.path.join(filepath_rgb, image_set[i]+end), -1)
+    img = scipy.misc.imread(os.path.join(filepath_rgb, image_set[i]+end), False, 'RGB')
     img = pad_image(img)
-    img = cv2.resize(img, (IMAGE_SIZE,IMAGE_SIZE) , interpolation=cv2.INTER_CUBIC)
+    img = scipy.misc.imresize(img, (IMAGE_SIZE,IMAGE_SIZE,3), 'bilinear')
     # Convert from [0, 255] -> [0.0, 1.0].
     img = img.astype(numpy.float32)
     img = numpy.multiply(img, 1.0 / 255.0)
-    #cv2.imshow("t", img)
-    #cv2.waitKey(0)
 
     # Depth image
-    #print(filepath_depth, image_set[i].replace("crop", "depthcrop"))
-    depth = cv2.imread(os.path.join(filepath_depth, image_set[i].replace("crop", "depthcrop")+end), -1)
+    depth = scipy.misc.imread(os.path.join(filepath_depth, image_set[i].replace("crop", "depthcrop")+end), False, 'F')
     depth = depth.reshape(depth.shape[0], depth.shape[1],1)
     depth = pad_image(depth)
-    depth = cv2.resize(depth, (IMAGE_SIZE,IMAGE_SIZE) , interpolation=cv2.INTER_CUBIC)
+    depth = scipy.misc.toimage(depth[:,:,0])
+    depth = scipy.misc.imresize(depth, (IMAGE_SIZE,IMAGE_SIZE), 'bilinear', 'F')
+    depth = numpy.asarray(depth)
     # Convert from [0, max(depth)) -> [0.0, 1.0].
     depth = depth.astype(numpy.float32)
     depth = numpy.multiply(depth, 1.0/numpy.max(depth))
-    #cv2.imshow("t", depth)
-    #cv2.waitKey(0)
 
     rgbd = numpy.zeros(  (IMAGE_SIZE,IMAGE_SIZE,channels), dtype=numpy.float32 )
     rgbd[:,:,0] = img[:,:,0]
