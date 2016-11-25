@@ -2,6 +2,11 @@ import numpy as np
 
 maps = {}
 
+# NOTE:
+# in the map definition below 1 denotes a wall and 0 denotes a free position
+# i.e. a position the agent can move to! Make sure to always include a border around the
+# map and to set the goal position (see utils.py) to a valid reachable position.
+
 # 0: 28x28:  for local view experiments: walls of size 2 so 5x5 pob won't see through walls
 maps[0] = np.array([
   #  0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27
