@@ -80,7 +80,7 @@ class Simulator:
         return self.cub_siz*y, self.cub_siz*(y+1), self.cub_siz*x, self.cub_siz*(x+1)
 
     def get_pob_from_ind(self, y, x):
-        pob_edg = self.pob_siz / 2
+        pob_edg = int(self.pob_siz) / int(2)
         return self.cub_siz*(y-pob_edg), self.cub_siz*(y+pob_edg+1), self.cub_siz*(x-pob_edg), self.cub_siz*(x+pob_edg+1)
 
     def get_h_val(self, active_pose, tgt_y, tgt_x):
