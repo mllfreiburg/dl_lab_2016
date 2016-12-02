@@ -67,10 +67,10 @@ class TransitionTable:
         self.minibatchNum = int(self.size - self.valid_size) / int(self.minibatch_size)
         self.minibatchInd = None
         self.stack_hist()
-        print "states & labels loaded."
-        print "states stacked w/ history of", self.hist_len
+        print("states & labels loaded.")
+        print("states stacked w/ history of", self.hist_len)
         self.split_train_valid()
-        print "train & valid data splited."
+        print("train & valid data splited.")
 
     def split_train_valid(self):
         train_size = self.size - self.valid_size
