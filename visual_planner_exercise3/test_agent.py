@@ -52,7 +52,7 @@ for step in range(opt.eval_steps):
         state = sim.newGame(opt.tgt_y, opt.tgt_x)
 
     if step % opt.prog_freq == 0:
-        print step
+        print(step)
 
     if opt.disp_on:
         if win_all is None:
@@ -67,5 +67,5 @@ for step in range(opt.eval_steps):
         plt.draw()
 
 # 2. calculate statistics
-print float(nepisodes_solved) / float(nepisodes)
+print(float(nepisodes_solved) / float(nepisodes))
 # 3. TODO perhaps  do some additional analysis
