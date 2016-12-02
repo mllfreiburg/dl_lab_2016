@@ -1,5 +1,5 @@
 import numpy as np
-import pylab as pl
+import matplotlib.pyplot as plt
 from random import randrange
 # custom modules
 from utils     import Options
@@ -56,15 +56,15 @@ for step in range(opt.eval_steps):
 
     if opt.disp_on:
         if win_all is None:
-            pl.figure()
-            win_all = pl.imshow(state.screen)
-            pl.figure()
-            win_pob = pl.imshow(state.pob)
+            plt.subplot(121)
+            win_all = plt.imshow(state.screen)
+            plt.subplot(122)
+            win_pob = plt.imshow(state.pob)
         else:
             win_all.set_data(state.screen)
             win_pob.set_data(state.pob)
-        pl.pause(opt.disp_interval)
-        pl.draw()
+        plt.pause(opt.disp_interval)
+        plt.draw()
 
 # 2. calculate statistics
 print float(nepisodes_solved) / float(nepisodes)
